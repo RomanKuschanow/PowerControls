@@ -1,0 +1,9 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PowerControls.Buttons">
+
+
+    <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type local:StateButton}" />
+
+</ResourceDictionary>
