@@ -1,9 +1,7 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:PowerControls.Buttons">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 
-
-    <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type local:StateButton}" />
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/PowerControls;component/StateButton/StateButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

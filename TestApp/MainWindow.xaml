@@ -5,13 +5,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TestApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pcb="clr-namespace:PowerControls.Buttons;assembly=PowerControls"
+    xmlns:pcb="clr-namespace:PowerControls;assembly=PowerControls"
     Title="MainWindow"
     Width="400"
     Height="450"
     mc:Ignorable="d">
 
-    <Grid>
+    <Window.Resources>
+        <local:MainViewModel x:Key="vm" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -26,7 +30,13 @@
         <pcb:StateButton
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Hello" />
+            State="{Binding State, Mode=TwoWay}"
+            StateIndex="{Binding Index, Mode=TwoWay}"
+            States="{Binding States}" />
+        <Button
+            Grid.Column="1"
+            Command="{Binding ClickCommand}"
+            Content="wsoirgvjspoegb" />
     </Grid>
 
 </Window>
