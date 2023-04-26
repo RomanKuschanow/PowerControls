@@ -14,7 +14,6 @@ public class StateButton : Button
 {
     public static readonly DependencyProperty StatesProperty = DependencyProperty.Register("States", typeof(IEnumerable), typeof(StateButton), new PropertyMetadata(null, StatesPropertyChanged));
     public static readonly DependencyProperty StateProperty = DependencyProperty.Register("State", typeof(object), typeof(StateButton), new PropertyMetadata(null, StatePropertyChanged));
-    public static readonly DependencyProperty StateIndexProperty = DependencyProperty.Register("StateIndex", typeof(int), typeof(StateButton), new PropertyMetadata(0, StateIndexPropertyChanged));
 
     public IEnumerable<object> States
     {
@@ -25,11 +24,6 @@ public class StateButton : Button
     {
         get => GetValue(StateProperty);
         set => SetValue(StateProperty, value);
-    }
-    public int StateIndex
-    {
-        get => (int)GetValue(StateIndexProperty);
-        set => SetValue(StateIndexProperty, value);
     }
 
     static StateButton()
@@ -43,7 +37,7 @@ public class StateButton : Button
         SetBinding(ContentProperty, new Binding("State") { Converter = new ToStringConverter() });
     }
 
-    private void StateButton_Click(object sender, RoutedEventArgs e) => StateIndex = (StateIndex + 1) % States.Count();
+    private void StateButton_Click(object sender, RoutedEventArgs e) => State = States.ToList()[(States.ToList().IndexOf(State) + 1) % States.Count()];
 
     private static void StatesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -51,27 +45,13 @@ public class StateButton : Button
 
         if (e.NewValue is not null && e.NewValue != e.OldValue)
         {
-            if (sb.StateIndex >= sb.States.Count())
-            {
-                sb.StateIndex = sb.StateIndex % sb.States.Count();
-                sb.State = sb.States.ToList()[sb.StateIndex];
-            }
             if (sb.States.Contains(sb.State))
-            {
-                sb.State = sb.States.ToList()[sb.StateIndex];
-                sb.StateIndex = sb.States.ToList().IndexOf(sb.State);
-            }
+                sb.State = sb.States.ToList()[(sb.States.ToList().IndexOf(sb.State) + 1) % sb.States.Count()];
             else
-            {
-                sb.StateIndex = 0;
                 sb.State = default;
-            }
         }
         else if (e.NewValue is null)
-        {
             sb.State = default;
-            sb.StateIndex = 0;
-        }
     }
 
     private static void StatePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -79,31 +59,7 @@ public class StateButton : Button
         var sb = (StateButton)d;
 
         if (sb.States is not null)
-        {
             if (!sb.States.Contains(sb.State))
-            {
-                sb.StateIndex = 0;
                 sb.State = default;
-            }
-            sb.StateIndex = sb.States.ToList().IndexOf(sb.State);
-        }
-        else if (e.NewValue is null)
-            sb.StateIndex = 0;
-    }
-
-    private static void StateIndexPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        var sb = (StateButton)d;
-
-        if (sb.States is not null)
-        {
-            if ((int)e.NewValue >= sb.States.Count())
-            {
-                sb.StateIndex = 0;
-                sb.State = sb.States.First();
-            }
-            else
-                sb.State = sb.States.ToList()[sb.StateIndex];
-        }
     }
 }

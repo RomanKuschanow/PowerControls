@@ -28,15 +28,11 @@
         </Grid.RowDefinitions>
 
         <pcb:StateButton
+            MinWidth="50"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             State="{Binding State, Mode=TwoWay}"
-            StateIndex="{Binding Index, Mode=TwoWay}"
             States="{Binding States}" />
-        <Button
-            Grid.Column="1"
-            Command="{Binding ClickCommand}"
-            Content="wsoirgvjspoegb" />
     </Grid>
 
 </Window>

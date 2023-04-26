@@ -10,47 +10,10 @@ using System.Threading.Tasks;
 
 namespace TestApp;
 
-public partial class MainViewModel : INotifyPropertyChanged
+public partial class MainViewModel : ObservableObject
 {
     public List<int> States => new() { 0, 1, 2, 3 };
 
+    [ObservableProperty]
     private int state;
-
-    public int State
-    {
-        get => state;
-        set
-        {
-            state = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private int index;
-
-    public int Index
-    {
-        get => index;
-        set
-        {
-            index = value;
-            OnPropertyChanged();
-        }
-    }
-
-    [RelayCommand]
-    private void Click()
-    {
-        Index++;
-    }
-
-    #region PropertyChanged
-#nullable disable
-    public event PropertyChangedEventHandler PropertyChanged;
-    public void OnPropertyChanged([CallerMemberName] string name = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-    }
-#nullable enable
-    #endregion
 }
