@@ -12,8 +12,14 @@ namespace TestApp;
 
 public partial class MainViewModel : ObservableObject
 {
-    public List<int> States => new() { 0, 1, 2, 3 };
+    public List<int> States => new() { 1, 2, 3 };
 
     [ObservableProperty]
-    private int state;
+    private int? state;
+
+    [RelayCommand]
+    private void Click()
+    {
+        
+    }
 }

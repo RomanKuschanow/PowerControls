@@ -37,7 +37,17 @@ public class StateButton : Button
         SetBinding(ContentProperty, new Binding("State") { Converter = new ToStringConverter() });
     }
 
-    private void StateButton_Click(object sender, RoutedEventArgs e) => State = States.ToList()[(States.ToList().IndexOf(State) + 1) % States.Count()];
+    private void StateButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            State = States.ToList()[(States.ToList().IndexOf(State) + 1) % States.Count()];
+        }
+        catch
+        {
+            return;
+        }
+    }
 
     private static void StatesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -46,11 +56,11 @@ public class StateButton : Button
         if (e.NewValue is not null && e.NewValue != e.OldValue)
         {
             if (sb.States.Contains(sb.State))
-                sb.State = sb.States.ToList()[(sb.States.ToList().IndexOf(sb.State) + 1) % sb.States.Count()];
+                sb.State = sb.States.ToList()[sb.States.ToList().IndexOf(sb.State) % sb.States.Count()];
             else
-                sb.State = default;
+                sb.State = sb.States.FirstOrDefault();
         }
-        else if (e.NewValue is null)
+        else if (e.NewValue is null || !sb.States.Any())
             sb.State = default;
     }
 
@@ -60,6 +70,6 @@ public class StateButton : Button
 
         if (sb.States is not null)
             if (!sb.States.Contains(sb.State))
-                sb.State = default;
+                sb.State = sb.States.FirstOrDefault();
     }
 }
