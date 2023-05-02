@@ -2,6 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/PowerControls;component/StateButton/StateButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/PowerControls;component/MaskedTextBox/MaskedTextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/PowerControls;component/PlaceholderTextBox/PlaceholderTextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>

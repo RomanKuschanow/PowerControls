@@ -34,6 +34,18 @@
             Command="{Binding ClickCommand}"
             State="{Binding State, Mode=TwoWay}"
             States="{Binding States}" />
+        <pcb:MaskedTextBox
+            Grid.Column="1"
+            Margin="2"
+            VerticalAlignment="Center"
+            Mask="{Binding Mask}"
+            Result="{Binding Result, Mode=OneWayToSource}"
+            Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <pcb:PlaceholderTextBox
+            Grid.Column="2"
+            Margin="2"
+            VerticalAlignment="Center"
+            Placeholder="Type something" />
     </Grid>
 
 </Window>

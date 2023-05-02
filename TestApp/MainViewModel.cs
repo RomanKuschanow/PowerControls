@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PowerControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,17 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private int? state;
 
+    [ObservableProperty]
+    private string text = "";
+
+    [ObservableProperty]
+    private Mask mask = new(@"+38 (###) ###-##-##");
+
+    [ObservableProperty]
+    private string result = "";
+
     [RelayCommand]
     private void Click()
     {
-        
     }
 }
