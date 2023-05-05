@@ -14,6 +14,7 @@ namespace TestApp;
 public partial class MainViewModel : ObservableObject
 {
     public List<int> States => new() { 1, 2, 3 };
+    public Dictionary<object, string> Names => new() { { 1, "one" }, { 2, "two" }, { 3, "three" } };
 
     [ObservableProperty]
     private int? state;
