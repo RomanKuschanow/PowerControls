@@ -89,7 +89,7 @@ public class StateButton : Button
             if (!sb.States.Contains(sb.State))
                 sb.State = sb.States.FirstOrDefault();
 
-        if (sb.Captions.ContainsKey(sb.State))
+        if (sb.Captions is not null && sb.Captions.ContainsKey(sb.State))
             sb.Caption = sb.Captions[sb.State];
         else
             sb.Caption = sb.State.ToString();
